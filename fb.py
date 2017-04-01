@@ -19,9 +19,4 @@ data_type   = config['data_type']
 token       = config['token']
 graph_url = config['graph_url'] + api_version +"/" + page_target +"/" + data_type + "?access_token=" + token
 
-web_response    =   urllib2.urlopen(graph_url)
-
-readeble_page   =   web_response.read()
-json_fbpage   =   json.loads(readeble_page)
-
-result = db.FBComments.insert_one(json_fbpage)
+result = db.FBComments.insert_one(json.loads(urllib2.urlopen(graph_url).read()))
